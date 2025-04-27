@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>APL</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <script>           
+            function start() {
+
+            }
+        </script>
+
+        <style>
+            .mainZone {
+                position: absolute;
+                left: 2.5%;
+                top: 4%;
+                height: 200%;
+                width: 95%;
+                background-color: #00b140;
+            }
+            
+            .lineTop {
+                position: absolute;                
+                left: 1%;
+                width: 98%;
+                height: 45px;
+                top: 220px;                
+                background-color: gray;
+            }
+            
+            .humidZone {
+                position: absolute;                
+                text-align: center;
+                left: 1%;
+                width: 32%;
+                height: 200px;
+                top: 10px;                
+                background-color: gray;
+            }
+            
+            .healthZone {
+                position: absolute;                 
+                text-align: center;
+                left: 34%;              
+                width: 32%;
+                height: 200px;
+                top: 10px;                
+                background-color: gray;
+            }
+            
+            .airZone {
+                position: absolute;                                
+                text-align: center;
+                right: 1%;
+                width: 32%;
+                height: 200px;
+                top: 10px;                
+                background-color: gray;
+            }
+            
+            .line {
+                position: absolute;               
+                width: 100%;
+                height: 45px;
+                bottom: -55px;
+                background-color: gray;
+            }
+
+            .rightHolder {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+            }
+            
+            .bottomHolder {                
+                width: 100%;
+                position: absolute;
+                bottom: 5px;
+            }
+
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+            }
+
+            .switchInput {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .switchSlider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: 0.4s;
+                transition: 0.4s;
+            }
+
+            .switchSlider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: 0.4s;
+                transition: 0.4s;
+            }
+
+            input:checked + .switchSlider {
+                background-color: #2196F3;
+            }
+
+            input:focus + .switchSlider {
+                box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .switchSlider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+            .switchSlider.round {
+                border-radius: 34px;
+            }
+
+            .switchSlider.round:before {
+                border-radius: 50%;
+            }
+
+            .slider {
+                -webkit-appearance: none;
+                width: 150px;
+                height: 15px;
+                border-radius: 5px;
+                background: #d3d3d3;
+                outline: none;
+                opacity: 0.7;
+                -webkit-transition: 0.2s;
+                transition: opacity 0.2s;
+            }
+
+            .slider:hover {
+                opacity: 1;
+            }
+
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background: #04AA6D;
+                cursor: pointer;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background: #04AA6D;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main" class="mainZone">
+            <div class="humidZone">
+                <hr style="margin-bottom: -5px; visibility: hidden;"> <span style="color: #fa702d; font-size: 26px;">Humidity</span> <hr style="margin-bottom: 17px; visibility: hidden;"> <span id="humidNum" style="color: #5cb5e1; font-size: 56px;">50%</span>
+                <div class="bottomHolder">
+                    <input type="range" min="0" max="100" value="50" class="slider" id="humidSlider">
+                </div>
+            </div>
+            <div class="healthZone">
+                <hr style="margin-bottom: -5px; visibility: hidden;"> <span style="color: #fa702d; font-size: 26px;">Lichen Coverage</span> <hr style="margin-bottom: 17px; visibility: hidden;"> <span style="color: #29ff52; font-size: 56px;">100%</span>
+                <div class="bottomHolder">                                        
+                    <label class="switch"> 
+                        <input type="checkbox" checked/>
+                        <span class="switchSlider round"></span>
+                    </label>
+               </div>
+            </div>            
+            <div class="airZone">
+                <hr style="margin-bottom: -5px; visibility: hidden;"> <span style="color: #fa702d; font-size: 26px;">Air Purity</span> <hr style="margin-bottom: 17px; visibility: hidden;"> <span style="color: #FFFAA0; font-size: 56px;">100%</span>
+                <div class="bottomHolder">                     
+                    <label class="switch">
+                        <input type="checkbox" checked/>
+                        <span class="switchSlider round"></span>
+                    </label>
+               </div>
+            </div>
+            <div class="lineTop">
+                <span style="line-height: 45px; margin-left: 5px;">Hardness</span>
+                   <div class="rightHolder">
+                        <input type="range" min="1" max="100" value="" class="slider" id="hardSlide">
+                        <br>Mohns: <span id="hardNum">5.0</span>
+                   </div>
+               <div class="line">
+                   <span style="line-height: 45px; margin-left: 5px;">Style</span>
+                   <div class="rightHolder">
+                       <hr style="margin-bottom: -2px; visibility: hidden;">
+                       <select>
+                           <option>Lichen</option>
+                           <option>Moss</option>                    
+                           <option>Grass</option>
+                       </select>
+                   </div>
+                   <div class="line">
+                       <span style="line-height: 45px; margin-left: 5px;">Color</span>
+                       <div class="rightHolder">
+                           <hr style="margin-bottom: -6px; visibility: hidden;">
+                           <input type="color">
+                       </div>       
+                       <div class="line">
+                           <span style="line-height: 45px; margin-left: 5px;">Glow</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+                           <div class="line">
+                               <span style="line-height: 45px; margin-left: 5px;">Smell</span>
+                               <div class="rightHolder">
+                                   <hr style="margin-bottom: -2px; visibility: hidden;">
+                                   <select>
+                                       <option>Home</option>
+                                       <option>Lemon</option>
+                                       <option>Abyss</option>
+                                   </select>
+                               </div>
+                               <div class="line">
+<span style="line-height: 45px; margin-left: 5px;">Wallpaper</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+<div class="line">
+<span style="line-height: 45px; margin-left: 5px;">Siding</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+<div class="line">
+                               <span style="line-height: 45px; margin-left: 5px;">Pattern</span>
+                               <div class="rightHolder">
+                                   <hr style="margin-bottom: -2px; visibility: hidden;">
+                                   <select>
+                                       <option>Plain</option>
+                                       <option>Spotted</option>
+                                       <option>Striped</option>
+<option>Luxury</option>
+                                   </select>
+                               </div>
+<div class="line">
+<span style="line-height: 45px; margin-left: 5px;">Furniture Coating</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+<div class="line">
+<span style="line-height: 45px; margin-left: 5px;">Theater</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+<div class="line">
+<span style="line-height: 45px; margin-left: 5px;">Theif Protection</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+<div class="line">
+<span style="line-height: 45px; margin-left: 5px;">Subscription Management</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+<div class="line">
+<span style="line-height: 45px; margin-left: 5px;">Furniture Replication</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+<div class="line">
+<span style="line-height: 45px; margin-left: 5px;">Terrorism Protection</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+<div class="line">
+<span style="line-height: 45px; margin-left: 5px;">Tax Management</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+<div class="line">
+<span style="line-height: 45px; margin-left: 5px;">Consciciouness</span>
+                           <div class="rightHolder">                    
+                               <label class="switch">
+                                   <input type="checkbox" checked/>
+                                   <span class="switchSlider round"></span>
+                               </label>
+                           </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+                           </div>
+                       </div>
+                   </div>
+               </div>                
+            </div>                                     
+        </div>        
+        <script>
+            start();
+            
+            document.getElementById("hardSlide").oninput = function() {
+                document.getElementById("hardNum").innerHTML = (this.value/10).toFixed(1);
+            }
+            
+            document.getElementById("humidSlider").oninput = function() {
+                document.getElementById("humidNum").innerHTML = this.value + "%";
+            }
+        </script>
+    </body>
+</html>
